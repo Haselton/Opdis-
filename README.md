@@ -1,6 +1,8 @@
 # OPDIS
 
-**OPDIS aims to build a self-improving digital organism capable of superintelligence. Its missions could run for years.** A volunteer would install a client, choose how much of their computer’s graphics processor (GPU) to lend, and become one node in the organism. Machines could join for an evening or leave for good. The organism would remember its objective, the evidence gathered so far and what to try next.
+**OPDIS is an open-source project to build a self-improving digital organism powered by volunteer GPUs. Its long-term missions include advancing health research, expanding human freedom, and making compulsory labor unnecessary.**
+
+A volunteer would install a client, choose how much of their computer’s graphics processor (GPU) to lend, and become one node in the organism. Machines could join for an evening or leave for good. The organism would remember its objective, the evidence gathered so far and what to try next.
 
 The Open Distribution Intelligence System is an open-source research project. The proposed organism would draw its computing power from many owners and make its capabilities freely available, including to people with no GPU or subscription.
 
