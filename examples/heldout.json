@@ -1,0 +1,22 @@
+[
+  {
+    "id": "smoke-01",
+    "prompt": "Print the bin label alone from 'aisle 19 / bin R-07 / rack F-31'.",
+    "expected": "R-07"
+  },
+  {
+    "id": "smoke-02",
+    "prompt": "Locker T-12 was moved into bin L-88. Which bin? Print only its code.",
+    "expected": "L-88"
+  },
+  {
+    "id": "smoke-03",
+    "prompt": "Read 'shelf V-22; bin B-61; seal 811'. Output the bin code alone.",
+    "expected": "B-61"
+  },
+  {
+    "id": "smoke-04",
+    "prompt": "The carton reads 'bin X-03', with lot K-40 nearby. Return just the bin code.",
+    "expected": "X-03"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "dev-01",
+    "prompt": "Return only the storage bin code in 'route 3, bin W-17, locker 44'.",
+    "expected": "W-17"
+  },
+  {
+    "id": "dev-02",
+    "prompt": "From 'bin C-91, aisle G, cart 6', extract only the bin code.",
+    "expected": "C-91"
+  },
+  {
+    "id": "dev-03",
+    "prompt": "Give the bin code only. Log: carton 730 marked bin M-05.",
+    "expected": "M-05"
+  }
+]
