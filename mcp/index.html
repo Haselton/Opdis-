@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contribute to OPDIS</title>
+<meta name="description" content="Help test an open-source AI built for shared GPUs. Find a research task, contribute test cases, and follow the evidence for recursive self-improvement.">
+<meta property="og:title" content="Contribute to OPDIS"><meta property="og:description" content="Help test whether an open AI can improve how it learns. You can contribute with a phone.">
+<meta property="og:image" content="https://raw.githubusercontent.com/Haselton/Opdis-/main/docs/OPDIS-Project-Preview.png"><meta name="twitter:card" content="summary_large_image">
+<style>
+:root{color-scheme:dark;font:17px/1.55 Inter,system-ui,sans-serif;color:#edf5fa;background:#101b22}*{box-sizing:border-box}body{max-width:52rem;margin:auto;padding:2rem 1.25rem 4rem}nav,section,footer{border-top:1px solid #39505a;padding:1.4rem 0}nav{border-top:0;border-bottom:1px solid #39505a;display:flex;justify-content:space-between;gap:1rem}header{padding:2.5rem 0}h1{font-size:clamp(2.4rem,7vw,4.8rem);line-height:1.03;letter-spacing:-.045em;margin:0 0 1.1rem}h2{font-size:1.4rem;margin:.15rem 0}p{max-width:44rem;margin:.55rem 0;color:#d1e1e7}a{color:#8fe3d3;text-underline-offset:.2em}nav strong{letter-spacing:.1em}code{overflow-wrap:anywhere;color:#8fe3d3}details{margin:1rem 0}summary{cursor:pointer}footer{font-size:.88rem}
+</style>
+<nav><strong>OPDIS</strong><a href="https://github.com/Haselton/Opdis-">GitHub project</a></nav>
+<header><h1>Help test an AI that learns to improve.</h1><p>OPDIS is an open-source project building toward a shared GPU network. You can contribute research cases from your phone or help measure what happens when a second GPU joins.</p></header>
+<section><h2>Contribute from your phone</h2><p>Write four original questions with exact answers. Two teach the task and two check whether the instruction works on new inputs. A second task family helps test whether an improvement carries over.</p><a href="https://github.com/Haselton/Opdis-/blob/main/CONTRIBUTING.md">Prepare a contribution</a> · <a href="https://github.com/Haselton/Opdis-/issues?q=OPD-011">Check OPD-011 discussions</a></section>
+<section><h2>Bring two GPUs</h2><p>Compare the same workload on each machine alone and on both together. Record model versions, timings and completed tasks so someone else can reproduce the result.</p><a href="https://github.com/Haselton/Opdis-/blob/main/docs/RUNNING.md">Open the hardware experiment</a></section>
+<section><h2>Follow the evidence</h2><p>The published baseline demonstrated task sharing on two simulated workers. A physical two-GPU speedup and sustained improvement on unfamiliar tasks are open research questions.</p><a href="https://github.com/Haselton/Opdis-/blob/main/PROJECT_PROGRESS.md">Read the project tracker</a></section>
+<section><h2>Use the contributor tools</h2><p>Try asking “I only have a phone. Which OPDIS task can I help with?” or “Has OPDIS demonstrated an improvement on unfamiliar tasks?”</p><details><summary>MCP connection details</summary><p>The contribution tools find tasks, validate a draft, and retrieve evidence. The server endpoint on this site is <code>/mcp</code>. Availability in ChatGPT depends on the plugin connection and your workspace.</p></details></section>
+<footer><strong>Contribution privacy</strong><p>Use original examples suitable for public release. The contributor service processes drafts in memory and returns them to the caller. You choose what to publish on GitHub. Your chat and your hosting provider may retain their own records.</p></footer>
+</html>

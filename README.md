@@ -28,6 +28,8 @@ The next hardware milestone is a measured run on two physical GPUs. The installa
 
 ## Help build it
 
+[Open the contributor page](https://opdis-contribute.haseltonmediagroup.chatgpt.site) to find phone and GPU tasks. The [MCP server](mcp/README.md) helps draft original test cases and links experimental claims to their sources.
+
 - **With a GPU**, help measure the same workload on two physical machines and on each machine alone under OPD-001. [Hardware setup](docs/RUNNING.md)
 - **With a phone or coding assistant**, contribute four checkable test cases under OPD-011. [Contributor instructions](CONTRIBUTING.md#bring-your-own-assistant)
 - **With distributed systems experience**, help a mission survive the loss of its coordinator under OPD-013, or build a test that verifies and rolls back a proposed repair under OPD-014. [Tasks and acceptance criteria](PROJECT_PROGRESS.md)
