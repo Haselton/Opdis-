@@ -8,6 +8,14 @@ The Open Distribution Intelligence System is an open-source research project. Th
 
 [Read the white paper](docs/OPDIS-White-Paper.pdf) · [See the project tracker](PROJECT_PROGRESS.md) · [Run the prototype](docs/RUNNING.md)
 
+## Start with your coding assistant
+
+> Give me the OPDIS project briefing. What works today, what still needs proof, and what is one small change I can make with my coding assistant and no GPU? Show me how to tell when it works.
+
+Open this repository in VS Code or Claude Code, enable the project’s `opdis` MCP connection, and paste the prompt above. The hosted connection needs no local model or GPU. If your client asks you to sign in, follow its connection prompt. You can also [read the same briefing on GitHub](PROJECT_PROGRESS.md#contributor-briefing) and paste the prompt into any assistant that can read this repo.
+
+[Contributor MCP setup and source](CONTRIBUTING.md#connect-the-contributor-mcp) · [Current work queue](PROJECT_PROGRESS.md#work-queue)
+
 ## What could it spend years doing?
 
 A community might ask why research into a neglected health problem has stalled. Tonight’s nodes could search public studies and record conflicting findings. Next month, a new group of nodes could pick up an unresolved question, check an earlier result against new evidence and offer researchers an experiment worth trying. People with the relevant expertise would judge the findings.

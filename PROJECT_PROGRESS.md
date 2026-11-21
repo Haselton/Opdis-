@@ -4,7 +4,21 @@ OPDIS aims to build one continuous digital organism. A volunteer would install a
 
 Long-range missions might investigate a neglected health problem or automate work people must do to survive. The wider goals are freedom from oppressive systems and dependency, and an end to compulsory human labor. Recursive improvement toward exponentially growing capability and superintelligence is a research ambition. The immediate engineering questions are whether a mission can survive a restart, whether a repair can be tested and reversed, and whether retained improvements help on fresh tasks at equal compute.
 
-**Pick your first task.** With a phone or assistant, contribute four original test cases under **OPD-011**. With two GPU machines, start with **OPD-001**. For mission continuity and repair, see **OPD-013** and **OPD-014**. **OPD-010** covers an optional local ChatGPT client for contributors. [Copy the contributor prompt](CONTRIBUTING.md#bring-your-own-assistant).
+**Pick your first task.** With a coding assistant, start the two-turn chat test under **OPD-015**. With only a phone, contribute four original test cases under **OPD-011**. With two GPU machines, start with **OPD-001**. For mission continuity and repair, see **OPD-013** and **OPD-014**. **OPD-010** covers an optional local ChatGPT client for contributors. [Copy the contributor prompt](CONTRIBUTING.md#bring-your-own-assistant).
+
+## Contributor briefing
+
+### Mission
+
+OPDIS aims to build the most powerful decentralized superintelligence in the universe and make it freely accessible. People would lend GPU time on their own terms. One persistent intelligence would carry a mission across machines, learn from its mistakes and improve the tools it uses to make the next discovery.
+
+### Demonstrated progress
+
+As of November 21, 2026, this is a trusted-worker research prototype. The public coordinator distributes separate prompts and scores proposed instruction changes for human review. Eight core tests passed with simulated inference. A separate Android prototype can send one prompt to a paired PC. A simulated model exercised that request format and a separate streaming server. A real phone conversation with a physical model worker is still a milestone.
+
+### Next milestones
+
+The next app milestone is a streamed answer followed by a second question that remembers the first turn. The compute milestone is a measured run on two physical GPUs and recovery when one leaves. Persistent mission memory, owner-controlled participation and verified repairs would let work continue across machines. The research milestone is a retained improvement that beats starting over on unfamiliar tasks at equal compute.
 
 ## Current state
 
@@ -38,6 +52,7 @@ These IDs are stable references for issues and pull requests. An ID in this tabl
 | P1 | OPD-012 | Open for design | Design free public access across independently operated coordinators. | Walk through a public job submitted by someone without a GPU. Show how two groups advertise spare capacity, accept or decline a job, prevent duplicate execution, and return its result. Explain how an operator caps donated time, who bears the cost, and which jobs wait under load. Include a worked example with demand greater than supply and a volunteer leaving mid-job. |
 | P0 | OPD-013 | Open | Keep one public mission alive through a coordinator restart. | Build a local, durable mission record containing the objective, owner-set budget, completed steps and their evidence, unresolved questions and next step. Stop and restart the coordinator in a test. Verify it resumes the same mission, preserves results and remaining budget, and skips completed steps. |
 | P1 | OPD-014 | Open | Demonstrate diagnosis, repair verification and rollback for one faulty tool using synthetic data. | Inject a known units-conversion bug into a fixture. Require the repair harness to reproduce the failure, isolate the faulty step and try a candidate on separate cases. Show a verified fix and a candidate that introduces a regression. Verify rollback restores the last working version and records the failed attempt. |
+| P0 | OPD-015 | Open | Make a two-turn phone conversation a reproducible public app test. | Start with a synthetic conversation fixture and a test using a scripted worker. Show two streamed chunks, a follow-up that receives the earlier turn, and restoration after reopening. Record a real phone and model run separately when available. |
 
 Open tasks can be claimed in a linked issue. Use **In progress** with a claim and next step, **In review** with a pull request, **Blocked** with a dependency, or **Done** with merged evidence. Check the issue before starting. Keep the last accepted result visible while new work is in review.
 
@@ -48,5 +63,7 @@ Choose one row and take one bounded piece of it. For example, ask your assistant
 The GPU pool and human contributions have separate accounting. A user can choose a task, use their own assistant and submit a patch or test result. OPD-010 explores using authorized ChatGPT requests locally on that person’s behalf. Current OpenAI documentation ties app usage and limits to the authorizing user and workspace. It does not describe transferring personal allowances into a collective token balance. OPDIS stores contributions that survive a session, such as reviewed code, test cases and measured improvements. [OpenAI integration guide](https://developers.openai.com/siwc/token-sharing-open-source) · [User controls](https://learn.chatgpt.com/docs/sign-in-with-chatgpt)
 
 ## Updating this tracker
+
+Keep the three Contributor briefing headings and update their text when evidence or milestones change. The hosted MCP reads this section and the work queue together.
 
 Reference the ID in the issue or pull request and state which acceptance condition it addresses. Include the commit, exact command, environment, observed result and any remaining gaps. For hardware experiments, include model and GPU details using anonymous worker labels. Update the relevant row when evidence is merged, linking the public issue, pull request or sanitized run record. Mark partial work explicitly so another contributor can pick up the next step.
