@@ -13,3 +13,5 @@ jobs:
         with:
           node-version: '22'
       - run: node --test test.mjs
+      - run: npm ci --prefix mcp
+      - run: npm test --prefix mcp

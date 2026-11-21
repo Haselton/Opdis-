@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="OPDIS">
+  <rect width="128" height="128" rx="26" fill="#101e26"/>
+  <g fill="none" stroke="#82e2d1" stroke-width="7">
+    <circle cx="64" cy="64" r="38"/>
+    <path d="M33 42l59 34M36 90l48-62M27 66l73-5" stroke-width="4"/>
+  </g>
+  <g fill="#fff3cc" stroke="#101e26" stroke-width="3">
+    <circle cx="32" cy="44" r="8"/><circle cx="38" cy="91" r="8"/>
+    <circle cx="82" cy="30" r="8"/><circle cx="99" cy="78" r="8"/>
+  </g>
+</svg>

@@ -32,6 +32,8 @@ Baseline checked **2026-11-05**. Run `node --test test.mjs` from the repository 
 
 The current release runs on trusted, individually configured peers, one coordinator per run. The installable GPU volunteer client, durable mission state, automatic repair and a free public network are development goals.
 
+Under OPD-011 the [contributor MCP server](mcp/README.md) can prepare a four-case draft, check for overlaps against bundled examples, and link the contributor to review instructions. The original task remains open for reviewed examples in a second task family.
+
 ## Work queue
 
 These IDs are stable references for issues and pull requests. An ID in this table does not imply that a GitHub issue already exists. Each row describes one contribution and its acceptance evidence.
