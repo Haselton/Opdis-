@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 export const repo = 'https://github.com/Haselton/Opdis-';
 export const board = repo + '/blob/main/PROJECT_PROGRESS.md';
-const publicTracker = 'https://raw.githubusercontent.com/Haselton/Opdis-/main/PROJECT_PROGRESS.md';
+const publicTracker = 'https://api.github.com/repos/Haselton/Opdis-/contents/PROJECT_PROGRESS.md?ref=main';
 
 export function parseTracker(markdown) {
   markdown = markdown.replaceAll('\r\n', '\n');
@@ -28,13 +28,17 @@ export function publicProgressReader(bundled, request = fetch) {
   let lastGood, nextRead = 0, pending;
   async function refresh() {
     try {
-      const response = await request(publicTracker, { signal: AbortSignal.timeout(3000), redirect: 'error' });
-      if (!response.ok) throw new Error('Tracker unavailable');
+      const response = await request(publicTracker, {
+        headers: { Accept: 'application/vnd.github.raw+json', 'User-Agent': 'OPDIS-Contributors' },
+        signal: AbortSignal.timeout(8000), redirect: 'error'
+      });
+      if (!response.ok) throw new Error('Tracker returned HTTP ' + response.status);
       const data = parseTracker(await response.text());
       lastGood = { ...data, source: board, scope: 'Public main branch tracker.', checkedAt: new Date().toISOString() };
       nextRead = Date.now() + 300000;
       return lastGood;
-    } catch {
+    } catch (error) {
+      console.warn('Public OPDIS tracker refresh:', error.name, error.message);
       nextRead = Date.now() + 30000;
       return lastGood
         ? { ...lastGood, scope: 'Last successful GitHub read. Refresh unavailable.' }

@@ -44,7 +44,7 @@ test('hosted onboarding uses updated task status and labels offline fallback', a
   let reads = 0;
   const latest = publicProgressReader(bundled, async url => {
     reads++;
-    assert.equal(url, 'https://raw.githubusercontent.com/Haselton/Opdis-/main/PROJECT_PROGRESS.md');
+    assert.equal(url, 'https://api.github.com/repos/Haselton/Opdis-/contents/PROJECT_PROGRESS.md?ref=main');
     return new Response(changed);
   });
   const [a,b] = await Promise.all([latest(),latest()]);
