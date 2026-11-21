@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "opdis": {
+      "type": "http",
+      "url": "https://opdis-contribute.haseltonmediagroup.chatgpt.site/mcp"
+    }
+  }
+}

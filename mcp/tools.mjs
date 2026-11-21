@@ -3,17 +3,12 @@ import { z } from 'zod';
 import { draftSchema, prepareDraft } from './draft.mjs';
 import tracker from '../PROJECT_PROGRESS.md';
 
-export const repo = 'https://github.com/Haselton/Opdis-';
-const board = repo + '/blob/main/PROJECT_PROGRESS.md';
+import { repo, board, parseTracker, briefing, openTasks } from './progress.mjs';
+export { repo };
+export const bundledProgress = { ...parseTracker(tracker), source: board, scope: 'Tracker bundled with this checkout or release.' };
+const roles = z.enum(['phone','gpu','developer','vibecoder','all']);
 const evidenceCommit = '3eb84253bfb2286c7324c734f91611958e749ed4';
 const evidenceSource = repo + '/blob/' + evidenceCommit + '/PROJECT_PROGRESS.md';
-const allTasks = tracker.split('\n').filter(line => /^\| P\d \| OPD-\d+ \|/.test(line)).map(line => {
-  const [priority, id, status, task, acceptance] = line.slice(1, -1).split('|').map(cell => cell.trim());
-  return { id, priority, status, task, acceptance, discussion: repo + '/issues?q=' + encodeURIComponent(id) };
-});
-if (!allTasks.length) throw new Error('No OPDIS tasks found in the project tracker.');
-
-const roleTasks = { phone: ['OPD-011'], gpu: ['OPD-001', 'OPD-008'] };
 const annotations = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 export const evidence = {
   scope: 'Public project record at commit ' + evidenceCommit.slice(0, 7),
@@ -25,22 +20,24 @@ export const evidence = {
   ], latestTracker: board
 };
 
-export function registerTools(server) {
+export function registerTools(server, readProgress) {
   function register(name, title, description, inputSchema, run) {
-    server.registerTool(name, { title, description, inputSchema, annotations }, input => {
+    server.registerTool(name, { title, description, inputSchema, annotations }, async input => {
       try {
-        const result = run(input);
+        const result = await run(input);
         return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
       } catch (error) {
         return { isError: true, content: [{ type: 'text', text: error.message }] };
       }
     });
   }
-  register('find_tasks', 'Find OPDIS tasks', 'Find open research tasks for a phone contributor, a GPU operator, or a developer. Returns acceptance criteria and links to check current claims.',
-    z.strictObject({ role: z.enum(['phone','gpu','developer','all']).default('all') }), ({ role }) => ({
-      source: board, scope: 'Task tracker bundled with this release. Check the linked GitHub discussions before claiming work.',
-      tasks: allTasks.filter(task => task.status.startsWith('Open') && (!roleTasks[role] || roleTasks[role].includes(task.id)))
-        .filter(task => role !== 'developer' || !['OPD-001', 'OPD-011'].includes(task.id)) }));
+  register('get_project_briefing', 'Start contributing to OPDIS', 'Start here to understand the mission, demonstrated progress, next milestones and one open task matched to your equipment or coding assistant.',
+    z.strictObject({ role: roles.default('vibecoder') }), async ({role}) => briefing(await readProgress(), role));
+  register('find_tasks', 'Find OPDIS tasks', 'Find open research tasks for phone, GPU, coding-assistant or developer contributors. Includes the project briefing, acceptance criteria and discussion links.',
+    z.strictObject({ role: roles.default('all') }), async ({role}) => {
+      const progress = await readProgress();
+      return { source: board, scope: progress.scope, briefing: briefing(progress, role), tasks: openTasks(progress.tasks, role) };
+    });
   register('prepare_test_cases', 'Prepare test cases', 'Validate two original public training examples and two smoke cases. Returns a contribution draft for the user to review. This tool does not submit or store it.',
     draftSchema, prepareDraft);
   register('get_evidence', 'Read improvement evidence', 'Check what OPDIS has demonstrated, the kind of evidence, and which capability or GPU experiments remain open. Each result links to the public source.',

@@ -1,14 +1,20 @@
 // SPDX-License-Identifier: MIT
 import { createMcpHandler, McpServer } from '@modelcontextprotocol/server';
-import { repo, registerTools } from './tools.mjs';
+import { repo, registerTools, bundledProgress } from './tools.mjs';
+import { publicProgressReader } from './progress.mjs';
 import page from './index.html';
 import missionCard from './assets/opdis-mission.jpg';
 
-const handler = createMcpHandler(() => {
-  const server = new McpServer({ name: 'opdis-contributors', version: '0.1.0', websiteUrl: repo });
-  registerTools(server);
-  return server;
-}, { responseMode: 'json' });
+const instructions = 'For a new contributor, begin with get_project_briefing and summarize the project goal, demonstrated progress, next milestones and one achievable task. Use the contributor’s equipment or default to vibecoder. Check the linked discussion for current claims.';
+function makeHandler(readProgress) {
+  return createMcpHandler(() => {
+    const server = new McpServer({ name: 'opdis-contributors', version: '0.2.0', websiteUrl: repo }, { instructions });
+    registerTools(server, readProgress);
+    return server;
+  }, { responseMode: 'json' });
+}
+const hosted = makeHandler(publicProgressReader(bundledProgress));
+const local = makeHandler(() => bundledProgress);
 
 export default {
   async fetch(request) {
@@ -44,6 +50,7 @@ export default {
     raw += decoder.decode();
     const headers = new Headers(request.headers);
     headers.delete('Content-Length');
+    const handler = ['127.0.0.1','localhost','[::1]'].includes(url.hostname) ? local : hosted;
     return handler.fetch(new Request(request.url, {method: 'POST', headers, body: raw, signal: request.signal}));
   }
 };

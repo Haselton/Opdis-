@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import app from './dist/worker.mjs';
+import { readFile } from 'node:fs/promises';
+import { briefing, parseTracker, publicProgressReader } from './progress.mjs';
 
 const endpoint = new URL('http://127.0.0.1:8787/mcp');
 const localFetch = (url, init) => app.fetch(new Request(url, init));
@@ -17,8 +19,41 @@ test.before(async () => client.connect(new StreamableHTTPClientTransport(endpoin
 test.after(async () => client.close());
 test('an MCP client discovers all contributor tools', async () => {
   const { tools } = await client.listTools();
-  assert.deepEqual(tools.map(t => t.name).sort(), ['find_tasks', 'get_evidence', 'prepare_test_cases']);
+  assert.deepEqual(tools.map(t => t.name).sort(), ['find_tasks', 'get_evidence', 'get_project_briefing', 'prepare_test_cases']);
   assert.ok(tools.every(t => t.annotations.readOnlyHint && t.inputSchema.type === 'object'));
+});
+test('a new contributor gets the mission, evidence, next milestones and a small open task', async () => {
+  assert.match(client.getInstructions(), /get_project_briefing/);
+  const first = payload(await call('get_project_briefing', {}));
+  assert.match(first.goal, /decentralized superintelligence/);
+  assert.match(first.demonstrated, /simulated/i);
+  assert.match(first.nextMilestones, /equal compute/i);
+  assert.equal(first.recommendedTask.id, 'OPD-015');
+  assert.match(first.recommendedTask.firstStep, /two-turn/);
+  assert.match(first.recommendedTask.acceptance, /reopening/);
+  const gpu = payload(await call('get_project_briefing', {role: 'gpu'}));
+  assert.equal(gpu.recommendedTask.id, 'OPD-001');
+  const phone = payload(await call('find_tasks', {role: 'phone'}));
+  assert.equal(phone.briefing.recommendedTask.id, 'OPD-011');
+});
+
+test('hosted onboarding uses updated task status and labels offline fallback', async () => {
+  const source = await readFile(new URL('../PROJECT_PROGRESS.md', import.meta.url), 'utf8');
+  const bundled = parseTracker(source);
+  const changed = source.replace('OPD-015 | Open', 'OPD-015 | Done');
+  let reads = 0;
+  const latest = publicProgressReader(bundled, async url => {
+    reads++;
+    assert.equal(url, 'https://raw.githubusercontent.com/Haselton/Opdis-/main/PROJECT_PROGRESS.md');
+    return new Response(changed);
+  });
+  const [a,b] = await Promise.all([latest(),latest()]);
+  assert.equal(a,b);
+  assert.equal(reads,1);
+  assert.equal(briefing(a,'vibecoder').recommendedTask.id, 'OPD-002');
+  assert.equal(b.tasks.find(t => t.id === 'OPD-015').status, 'Done');
+  const offline = publicProgressReader(bundled, async () => new Response('unavailable'));
+  assert.match((await offline()).scope, /Bundled release snapshot/);
 });
 test('finds phone and GPU tasks with acceptance evidence', async () => {
   const phone = payload(await call('find_tasks', {role: 'phone'}));

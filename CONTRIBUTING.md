@@ -2,6 +2,23 @@
 
 Use a pseudonym if you like. A GitHub account is needed to open issues and pull requests on GitHub. Public bylines, reviews and discussions can use contributor handles. There is no real-name sign-off or contributor agreement. Check the author and committer identity your Git client uses before sending a patch.
 
+## Connect the contributor MCP
+
+From a phone, [read the project briefing](PROJECT_PROGRESS.md#contributor-briefing) or use the [contributor site](https://opdis-contribute.haseltonmediagroup.chatgpt.site/#contribute). From a checkout, VS Code and Claude Code have repository configurations for the hosted server. Other clients that support remote Streamable HTTP can add this URL:
+
+    https://opdis-contribute.haseltonmediagroup.chatgpt.site/mcp
+
+Ask for the **OPDIS project briefing**. The tool is `get_project_briefing`. You can specify `vibecoder`, `phone`, `gpu` or `developer`. It returns the project's ambition, the evidence so far, the gaps, and a first task with a way to check the result. Follow its discussion link to see whether someone has started it. GitHub issues and pull requests carry the actual claims and reviews.
+
+The [MCP source and local setup](https://github.com/Haselton/Opdis-/tree/feature/contributor-mcp/mcp) are on the public contributor branch. For a local server, use Node.js 22 or newer and run these commands in a terminal:
+
+    git clone --branch feature/contributor-mcp https://github.com/Haselton/Opdis-.git opdis-contributors
+    cd opdis-contributors
+    npm ci --prefix mcp
+    npm start --prefix mcp
+
+Point your client at `http://127.0.0.1:8787/mcp`. The local server reads the tracker from your checkout when it builds. A GitHub account is needed only if you choose to post a contribution.
+
 ## Pick a task
 
 Check [PROJECT_PROGRESS.md](PROJECT_PROGRESS.md) for available work. Search existing issues and pull requests for the task ID before opening a claim. Use the issue thread to tell others which part you are taking. Submit the acceptance evidence with the change. Coding assistants should also read [AGENTS.md](AGENTS.md).
