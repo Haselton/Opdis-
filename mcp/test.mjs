@@ -42,8 +42,9 @@ test('hosted onboarding uses updated task status and labels offline fallback', a
   const bundled = parseTracker(source);
   const changed = source.replace('OPD-015 | Open', 'OPD-015 | Done');
   let reads = 0;
-  const latest = publicProgressReader(bundled, async url => {
+  const latest = publicProgressReader(bundled, async (url, options) => {
     reads++;
+    assert.equal(options.redirect, 'manual');
     assert.equal(url, 'https://api.github.com/repos/Haselton/Opdis-/contents/PROJECT_PROGRESS.md?ref=main');
     return new Response(changed);
   });

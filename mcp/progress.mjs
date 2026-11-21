@@ -30,7 +30,7 @@ export function publicProgressReader(bundled, request = fetch) {
     try {
       const response = await request(publicTracker, {
         headers: { Accept: 'application/vnd.github.raw+json', 'User-Agent': 'OPDIS-Contributors' },
-        signal: AbortSignal.timeout(8000), redirect: 'error'
+        signal: AbortSignal.timeout(8000), redirect: 'manual'
       });
       if (!response.ok) throw new Error('Tracker returned HTTP ' + response.status);
       const data = parseTracker(await response.text());
