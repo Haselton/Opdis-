@@ -12,6 +12,8 @@ const handler = createMcpHandler(() => {
 export default {
   async fetch(request) {
     const url = new URL(request.url);
+    if (url.pathname === '/draft.js' && ['GET', 'HEAD'].includes(request.method))
+      return new Response(request.method === 'HEAD' ? null : OPDIS_DRAFT_JS, { headers: { 'Content-Type': 'text/javascript; charset=utf-8', 'X-Content-Type-Options': 'nosniff' } });
     if (url.pathname === '/' && ['GET', 'HEAD'].includes(request.method))
       return new Response(request.method === 'HEAD' ? null : page, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
     if (url.pathname !== '/mcp') return new Response('Not found', { status: 404 });

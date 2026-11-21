@@ -10,7 +10,7 @@ This stateless service connects ChatGPT and other MCP clients to the OPDIS proje
 
 ## Try it
 
-Open the [public contributor page](https://opdis-contribute.haseltonmediagroup.chatgpt.site). The HTTP MCP endpoint is `/mcp` on the same site. ChatGPT plugin availability depends on the hosting connection and workspace.
+Open the [public contributor page](https://opdis-contribute.haseltonmediagroup.chatgpt.site). The browser form validates four cases on the contributor’s device and downloads the draft as JSON. The HTTP MCP endpoint is `/mcp` on the same site. ChatGPT plugin availability depends on the hosting connection and workspace.
 
 Example requests:
 
