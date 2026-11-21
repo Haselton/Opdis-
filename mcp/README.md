@@ -1,6 +1,6 @@
 # OPDIS contributor MCP server
 
-This stateless service connects ChatGPT and other MCP clients to the OPDIS project. A phone contributor can ask for a task, draft four exact-answer cases and inspect the published experimental evidence. The human contributor reviews the draft and chooses what to publish on GitHub.
+OPDIS aims to build an open superintelligence that improves its own tools and uses computing time donated by volunteers worldwide. This stateless service connects ChatGPT and other MCP clients to its contributor workflow. A phone contributor can ask for a task, draft four exact-answer cases and inspect the published experimental evidence. The human contributor reviews the draft and chooses what to publish on GitHub.
 
 | Tool | What it returns |
 | --- | --- |

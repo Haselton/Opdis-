@@ -2,6 +2,7 @@
 import { createMcpHandler, McpServer } from '@modelcontextprotocol/server';
 import { repo, registerTools } from './tools.mjs';
 import page from './index.html';
+import missionCard from './assets/opdis-mission.jpg';
 
 const handler = createMcpHandler(() => {
   const server = new McpServer({ name: 'opdis-contributors', version: '0.1.0', websiteUrl: repo });
@@ -12,6 +13,10 @@ const handler = createMcpHandler(() => {
 export default {
   async fetch(request) {
     const url = new URL(request.url);
+    if (url.pathname === '/opdis-mission.jpg' && ['GET', 'HEAD'].includes(request.method))
+      return new Response(request.method === 'HEAD' ? null : missionCard, { headers: {
+        'Content-Type': 'image/jpeg', 'Content-Length': String(missionCard.byteLength), 'Cache-Control': 'public, max-age=3600'
+      } });
     if (url.pathname === '/draft.js' && ['GET', 'HEAD'].includes(request.method))
       return new Response(request.method === 'HEAD' ? null : OPDIS_DRAFT_JS, { headers: { 'Content-Type': 'text/javascript; charset=utf-8', 'X-Content-Type-Options': 'nosniff' } });
     if (url.pathname === '/' && ['GET', 'HEAD'].includes(request.method))

@@ -52,7 +52,13 @@ test('modern protocol discovers this server', async () => {
   assert.ok(data.result.supportedVersions.includes(version));
 });
 test('landing page, request boundaries and method restrictions', async () => {
-  assert.match(await (await localFetch(new URL('/',endpoint))).text(), /Contribute from your phone/);
+  const page = await (await localFetch(new URL('/', endpoint))).text();
+  assert.match(page, /<h1>Building an open superintelligence for everyone<\/h1>/);
+  assert.match(page, /href="#draft"/);
+  assert.match(page, /property="og:image" content="[^"]+\/opdis-mission\.jpg"/);
+  const image = await localFetch(new URL('/opdis-mission.jpg', endpoint));
+  assert.equal(image.headers.get('Content-Type'), 'image/jpeg');
+  assert.deepEqual([...new Uint8Array(await image.arrayBuffer()).slice(0, 3)], [255, 216, 255]);
   assert.equal((await localFetch(endpoint)).status,405);
   assert.equal((await localFetch(endpoint,{ method:'POST',headers:{ Origin:'https://other.example' }})).status,403);
   assert.equal((await localFetch(endpoint,{ method:'POST',body:'a'.repeat(33000)})).status,413);

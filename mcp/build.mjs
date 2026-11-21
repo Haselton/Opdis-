@@ -7,5 +7,5 @@ await build({
   define: { OPDIS_DRAFT_JS: JSON.stringify(draft.outputFiles[0].text) },
   entryPoints: ['worker.mjs'], outfile: 'dist/worker.mjs', bundle: true, format: 'esm',
   platform: 'browser', target: 'es2022', minify: true, legalComments: 'eof',
-  loader: { '.md': 'text', '.html': 'text' }
+  loader: { '.md': 'text', '.html': 'text', '.jpg': 'binary' }
 });
